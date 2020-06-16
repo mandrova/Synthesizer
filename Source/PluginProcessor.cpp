@@ -24,6 +24,13 @@ NewProjectAudioProcessor::NewProjectAudioProcessor()
                        )
 #endif
 {
+    mySynth.clearVoices();
+    for (int i=0; i<5; i++){
+        mySynth.addVoice(new SynthVoice());
+    }
+    
+    mySynth.clearSounds();
+    mySynth.addSound(new SynthSound);
     
 }
 
@@ -98,7 +105,12 @@ void NewProjectAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
-    sine = new Sine(200, sampleRate);
+    osc1 = new Oscillator(500, sampleRate);
+    osc1->setWaveform(2);
+    
+    ignoreUnused(samplesPerBlock);
+    lastSampleRate = sampleRate;
+    mySynth.setCurrentPlaybackSampleRate(lastSampleRate);
     
 }
 
@@ -153,20 +165,25 @@ void NewProjectAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuf
     // the samples and the outer loop is handling the channels.
     // Alternatively, you can process the samples with the channels
     // interleaved by keeping the same state.
+    
+    buffer.clear();
+    mySynth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
+    
     for (int sample=0; sample < buffer.getNumSamples(); ++sample){
+        osc1->tick();
         for (int channel = 0; channel < totalNumOutputChannels; ++channel)
         {
             auto* channelData = buffer.getWritePointer (channel);
             
             
             
-            buffer.setSample(channel, sample, sine->getSample());
+            buffer.setSample(channel, sample, osc1->getSample());
             //buffer.clear(channel, sample, buffer.getNumSamples());
             //channelData[sample] = sine->getSample();
             
-            //std::cout << "Sine sample is: " << sample << "With value: " << sine->getSample() << std::endl;
+            //std::cout << "pulse sample is: " << sample << "With value: " << osc1->getSample() << std::endl;
         }
-        sine->tick();
+        
     }
 }
 

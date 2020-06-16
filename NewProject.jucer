@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="vODTxL" name="SynthVST" projectType="audioplug" jucerVersion="5.4.7"
-              pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn">
+              pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn"
+              pluginFormats="buildAU,buildStandalone">
   <MAINGROUP id="ht4kKt" name="SynthVST">
     <GROUP id="{1584619A-E32D-DCDB-2518-F5BC09B9E75F}" name="Source">
       <FILE id="FGAhVH" name="PluginProcessor.cpp" compile="1" resource="0"
@@ -11,6 +12,16 @@
       <FILE id="XB3dwk" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
       <FILE id="R5gTim" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+      <FILE id="nGJZDR" name="Oscillator.cpp" compile="1" resource="0" file="Source/Oscillator.cpp"/>
+      <FILE id="S0jkOL" name="Oscillator.h" compile="0" resource="0" file="Source/Oscillator.h"/>
+      <FILE id="TZZItP" name="Pulse.cpp" compile="1" resource="0" file="Source/Pulse.cpp"/>
+      <FILE id="KbJZo6" name="Pulse.h" compile="0" resource="0" file="Source/Pulse.h"/>
+      <FILE id="mXRHiH" name="sine.cpp" compile="1" resource="0" file="Source/sine.cpp"/>
+      <FILE id="LU9xoU" name="sine.h" compile="0" resource="0" file="Source/sine.h"/>
+      <FILE id="wYE8DM" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
+      <FILE id="GhVIcP" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
+      <FILE id="btWJOr" name="Waveform.cpp" compile="1" resource="0" file="Source/Waveform.cpp"/>
+      <FILE id="kZBjU0" name="Waveform.h" compile="0" resource="0" file="Source/Waveform.h"/>
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>

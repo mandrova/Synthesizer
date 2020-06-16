@@ -10,23 +10,24 @@ public:
   ~Sine();
 
   //return the current sample
-  float getSample();
+    float getSample();
   // go to next sample
-  void tick();
+    void tick();
 
   //getters and setters
-  void setFrequency(float frequency);
-  float getFrequency();
+    void setFrequency(float frequency);
+    float getFrequency();
 
   //NOTE - do we need a setter for phase? for now -> not using one
 
 private:
-  float amplitude;
-  float frequency;
-  float phase;
-  // contains the current sample
-  float sample;
-  float samplerate;
+    float amplitude;
+    float frequency;
+    float phase;
+    // contains the current sample
+    float sample;
+    float samplerate;
+    ;
 };
 
 #endif
