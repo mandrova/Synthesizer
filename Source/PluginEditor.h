@@ -30,16 +30,19 @@ public:
     void sliderValueChanged (Slider *slider) override;
     
     
+    
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     NewProjectAudioProcessor& processor;
     
     //declaration of sliders
-    Slider freqSlider;
+    Slider attackSlider;
     
     //declaration of labels
     
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (NewProjectAudioProcessorEditor)
+public:
+    std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> sliderValue;
 };

@@ -10,21 +10,25 @@
 
 #include "SynthVoice.h"
 
-SynthVoice::SynthVoice(){
+//SynthVoice::SynthVoice(){
     
-}
+//}
 
-SynthVoice::~SynthVoice(){
+//SynthVoice::~SynthVoice(){
     
-}
+//}
 
-bool SynthVoice::canPlaySound(SynthesiserSound *sound){
+bool synthVoice::canPlaySound(SynthesiserSound *sound){
     return dynamic_cast<SynthSound*>(sound) != nullptr;
 }
 
 //=====================================================================
 
-void SynthVoice::startNote (int midiNoteNumber, float velocity, SynthesiserSound* sound, int currentPitchWheelPosition){
+void synthVoice::getPeram(float* attack){
+    env1.setAttack(float(*attack));
+}
+
+void synthVoice::startNote (int midiNoteNumber, float velocity, SynthesiserSound* sound, int currentPitchWheelPosition){
     
     env1.trigger = 1;
     level = velocity;
@@ -35,7 +39,7 @@ void SynthVoice::startNote (int midiNoteNumber, float velocity, SynthesiserSound
 
 //=====================================================================
 
-void SynthVoice::stopNote(float velocity, bool allowTailOff){
+void synthVoice::stopNote(float velocity, bool allowTailOff){
     env1.trigger = 0;
     allowTailOff = true;
     
@@ -48,19 +52,19 @@ void SynthVoice::stopNote(float velocity, bool allowTailOff){
 
 //=====================================================================
 
-void SynthVoice::pitchWheelMoved(int newPitchWheelValue){
+void synthVoice::pitchWheelMoved(int newPitchWheelValue){
     
 }
 
 //=====================================================================
 
-void SynthVoice::controllerMoved(int controllerNumber, int newControllerValue){
+void synthVoice::controllerMoved(int controllerNumber, int newControllerValue){
     
 }
 
 //=====================================================================
 
-void SynthVoice::renderNextBlock(AudioBuffer <float> &outputBuffer, int startSample, int numSamples){
+void synthVoice::renderNextBlock(AudioBuffer <float> &outputBuffer, int startSample, int numSamples){
     env1.setAttack(2000);
     env1.setDecay(200);
     env1.setSustain(0.5);

@@ -19,14 +19,19 @@ NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor (NewProjectAudioP
     // editor's size to whatever you need it to be.
     setSize(400, 300);
     
-    freqSlider.setSliderStyle(Slider::SliderStyle::LinearBarVertical);
-    freqSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 100, 20);
-    freqSlider.setRange(200, 1000);
-    freqSlider.setValue(500);
-    freqSlider.addListener(this);
-    addAndMakeVisible(&freqSlider);
+    attackSlider.setSliderStyle(Slider::SliderStyle::LinearVertical);
+    attackSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 50, 15);
     
+    Range<double> attackRange;
+    attackRange.setStart(1);
+    attackRange.setEnd(5000);
     
+    attackSlider.setRange(attackRange, 1);
+    attackSlider.setValue(2000);
+    attackSlider.addListener(this);
+    addAndMakeVisible(&attackSlider);
+    
+    sliderValue = std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(processor.tree, "attack", attackSlider);
 }
 
 NewProjectAudioProcessorEditor::~NewProjectAudioProcessorEditor()
@@ -48,14 +53,14 @@ void NewProjectAudioProcessorEditor::resized()
 {
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
-    freqSlider.setBounds(100, getHeight() - (getHeight() - 20), 40, getHeight() - 60);
-    //processor.lblConsole->setBounds(200, 50, 200, 100);
+    attackSlider.setBounds(10, 10, 50, 150);
+    
 }
 
 void NewProjectAudioProcessorEditor::sliderValueChanged(Slider *slider)
 {
-    if (slider == &freqSlider){
-        processor.osc1->setFrequency(freqSlider.getValue());
+    if (slider == &attackSlider){
+        processor.attackTime = attackSlider.getValue();
     }
     //std::cout << "Sine frequency is: " << processor.osc1->getFrequency() << std::endl;
 }

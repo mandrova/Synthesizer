@@ -13,7 +13,7 @@
 #include <JuceHeader.h>
 #include "Oscillator.h"
 #include "SynthSound.h"
-#include "SynthVoice.h"
+#include "/Users/nickverbeek/NewProject/Source/SynthVoice.h"
 
 //==============================================================================
 /**
@@ -61,11 +61,19 @@ public:
     Oscillator *osc1;
     Label *lblConsole;
     
+    float attackTime;
+    
+    AudioProcessorValueTreeState tree;
+    
 private:
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (NewProjectAudioProcessor)
     Synthesiser mySynth;
-    //SynthVoice myVoice;
+    //SynthVoice* myVoice;
+    //SynthVoice* myVoice;
+    
+    //synthVoice* voice;
+    
     double lastSampleRate;
     
 };

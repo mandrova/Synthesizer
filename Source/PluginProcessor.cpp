@@ -11,6 +11,8 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
+
+
 //==============================================================================
 NewProjectAudioProcessor::NewProjectAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -21,12 +23,19 @@ NewProjectAudioProcessor::NewProjectAudioProcessor()
                       #endif
                        .withOutput ("Output", AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ),
+tree(*this, nullptr, "PARAMETER", { std::make_unique<AudioParameterFloat>("attack", "Attack", 1, 5000, 1)})
+
 #endif
 {
+    //NormalisableRange<float> attackParam (1, 5000);
+    //tree.createAndAddParameter("attack", "Attack", "Attack", attackParam, 1, nullptr, nullptr);
+    
+    
+    
     mySynth.clearVoices();
     for (int i=0; i<5; i++){
-        mySynth.addVoice(new SynthVoice());
+        mySynth.addVoice(new synthVoice());
     }
     
     mySynth.clearSounds();
@@ -166,6 +175,10 @@ void NewProjectAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuf
     // the samples and the outer loop is handling the channels.
     // Alternatively, you can process the samples with the channels
     // interleaved by keeping the same state.
+    
+    for (int i = 0; i < mySynth.getNumVoices(); i++){
+        if (myVoice)
+    }
     
     buffer.clear();
     mySynth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());

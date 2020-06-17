@@ -16,16 +16,19 @@
 #include "Oscillator.h"
 #include "maximilian.h"
 
-class SynthVoice :  public SynthesiserVoice
+class synthVoice :  public SynthesiserVoice
 {
 public:
     
-    SynthVoice();
-    ~SynthVoice();
+    //SynthVoice();
+    //~SynthVoice();
     
     bool canPlaySound(SynthesiserSound *sound);
     
     //=====================================================================
+    
+    void getPeram(float* attack);
+    
     
     void startNote (int midiNoteNumber, float velocity, SynthesiserSound* sound, int currentPitchWheelPosition);
     
