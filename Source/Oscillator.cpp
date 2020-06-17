@@ -10,13 +10,16 @@
 #include "sine.h"
 #include "Waveform.h"
 
+double Oscillator::samplerate = 44100;
 
-Oscillator::Oscillator(float frequency, float samplerate){
-    this->samplerate = samplerate;
-    this->frequency = frequency;
-    sine = new Sine(frequency, samplerate);
-    pulse = new Pulse(samplerate, frequency);
+Oscillator::Oscillator(){
+
+    
+    //sine = new Sine(frequency, samplerate);
+    //pulse = new Pulse(samplerate, frequency);
 }
+
+
 
 Oscillator::~Oscillator(){
     
@@ -38,7 +41,8 @@ void Oscillator::tick(){
     //    pulse->tick(samplerate);
     //    sample = pulse->getSample();
     //}
-    pulse->tick(samplerate);
+    //pulse->tick(samplerate);
+    //sample = pulse->getSample();
 }
 
 float Oscillator::getSample(){
@@ -47,4 +51,19 @@ float Oscillator::getSample(){
 
 float Oscillator::getFrequency(){
     return frequency;
+}
+
+void Oscillator::setup(double sampleRate_){
+    samplerate = sampleRate_;
+}
+
+nickOsc::nickOsc(){
+    
+}
+
+double nickOsc::sineWave(double frequency_){
+    double sRate = Oscillator::samplerate;
+    output = sine.getSample();
+    sine.tick(sRate, frequency_);
+    return output;
 }

@@ -6,13 +6,13 @@ class Sine
 {
 public:
   //Constructor and destructor
-  Sine(float frequency, float samplerate);
+  Sine();
   ~Sine();
 
   //return the current sample
     float getSample();
   // go to next sample
-    void tick();
+    void tick(double, double);
 
   //getters and setters
     void setFrequency(float frequency);

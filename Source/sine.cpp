@@ -2,10 +2,8 @@
 #include "math.h"
 #include <iostream>
 
-Sine::Sine(float frequency, float samplerate) {
+Sine::Sine() {
   // initialize members
-  this->frequency = frequency;
-  this->samplerate = samplerate;
   amplitude = 1.0;
   sample = 0;
   phase = 0;
@@ -24,13 +22,15 @@ float Sine::getSample() {
   return sample;
 }
 
-void Sine::tick() {
+void Sine::tick(double sampleRate_, double frequency_) {
   // TODO - frequency / samplerate can be implemented in a more efficient way
-  phase += frequency / samplerate;
+  phase += frequency_ / sampleRate_;
   sample = sin(M_PI * 2 * phase);
 
     //std::cout << "Sine - phase = \n" << phase;
-    
+    if (phase >= 1){
+        phase -= 1;
+    }
     
     
     

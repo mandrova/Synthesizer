@@ -12,8 +12,9 @@
 
 class Oscillator
 {
+    double lastSampleRate;
 public:
-    Oscillator(float, float);
+    Oscillator();
     ~Oscillator();
     
     void setFrequency(float frequency);
@@ -28,8 +29,11 @@ public:
     void tick();
     float getSample();
     
+    static double samplerate;
+    static void setup(double);
+    
 private:
-    float samplerate;
+    
     float frequency;
     float sample;
     
@@ -37,6 +41,18 @@ private:
     Pulse *pulse;
     int waveform;
     
+};
+
+class nickOsc
+{
+    double output;
+    double frequency;
+public:
+    nickOsc();
+    double sineWave(double);
+    
+private:
+    Sine sine;
 };
 
 #endif /* Oscillator_h */
