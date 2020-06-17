@@ -27,7 +27,7 @@ public:
     //=====================================================================
     
     void getPeram(float* attack){
-        env1.setAttack(float(*attack));
+        env1.setAttack(*attack);
     };
     
     
@@ -67,7 +67,7 @@ public:
     //=====================================================================
     
     virtual void renderNextBlock(AudioBuffer <float> &outputBuffer, int startSample, int numSamples){
-        env1.setAttack(2000);
+        //env1.setAttack(2000);
         env1.setDecay(200);
         env1.setSustain(0.5);
         env1.setRelease(2000);

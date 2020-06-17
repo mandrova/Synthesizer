@@ -177,7 +177,7 @@ void NewProjectAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuf
     // interleaved by keeping the same state.
     
     for (int i = 0; i < mySynth.getNumVoices(); i++){
-        if (myVoice = dynamic_cast<synthVoice*>(mySynth.getVoice(i))){
+        if ((myVoice = dynamic_cast<synthVoice*>(mySynth.getVoice(i)))){
             float* newFloatPtr = (float*) tree.getRawParameterValue("attack");
             myVoice->getPeram(newFloatPtr);
         }
