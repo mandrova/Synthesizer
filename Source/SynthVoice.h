@@ -53,6 +53,7 @@ private:
     
     maxiOsc osc1;
     nickOsc osc2;
+    maxiEnv env1;
     
     
 };

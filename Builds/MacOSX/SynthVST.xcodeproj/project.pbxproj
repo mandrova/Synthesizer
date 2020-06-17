@@ -312,30 +312,27 @@
 			name = Source;
 			sourceTree = "<group>";
 		};
-		A6DBCAC51A2603D0577B6D9A /* src */ = {
+		A6DBCAC51A2603D0577B6D9A /* Miximillian */ = {
 			isa = PBXGroup;
 			children = (
 				D705AD6DC654E304FE600D95 /* libs */,
 				59E6F30A32212EA80726B527 /* maximilian.cpp */,
 				8CED5AD21AFACDEB182157ED /* maximilian.h */,
 			);
-			name = src;
+			name = Miximillian;
 			sourceTree = "<group>";
 		};
 		B30C4B2357AB513C2279E703 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				A6DBCAC51A2603D0577B6D9A /* src */,
+				B8A8F6382499F728001D9250 /* Waves */,
+				A6DBCAC51A2603D0577B6D9A /* Miximillian */,
 				75120C0A9E9F52F553E3D036 /* PluginProcessor.cpp */,
 				BBAF082BC9F1803130AA91BC /* PluginProcessor.h */,
 				934D8B1FCFA372BEC0216659 /* PluginEditor.cpp */,
 				C011739B52A9A397CE9E64EF /* PluginEditor.h */,
 				2B12B5B69EA63081E2BA3E1B /* Oscillator.cpp */,
 				9229F8CB00B37DE05029CB95 /* Oscillator.h */,
-				B9846DEE7F330944A1FC2462 /* Pulse.cpp */,
-				F774E9AE3AB953165A6E7389 /* Pulse.h */,
-				FEF731CA8BFBE40BEB7FE628 /* sine.cpp */,
-				BFD36495C683D2222FE189F1 /* sine.h */,
 				21A63FA173199D09AAD9CA2A /* SynthSound.h */,
 				5D25BCFFA83862236C85627D /* SynthSound.cpp */,
 				06F2CD6DC5121A4574E7D273 /* SynthVoice.h */,
@@ -344,6 +341,17 @@
 				5D452F1C902F342335A86C89 /* Waveform.h */,
 			);
 			name = Source;
+			sourceTree = "<group>";
+		};
+		B8A8F6382499F728001D9250 /* Waves */ = {
+			isa = PBXGroup;
+			children = (
+				B9846DEE7F330944A1FC2462 /* Pulse.cpp */,
+				F774E9AE3AB953165A6E7389 /* Pulse.h */,
+				FEF731CA8BFBE40BEB7FE628 /* sine.cpp */,
+				BFD36495C683D2222FE189F1 /* sine.h */,
+			);
+			name = Waves;
 			sourceTree = "<group>";
 		};
 		B9C43AA328DE12A4335AB313 /* JUCE Library Code */ = {
