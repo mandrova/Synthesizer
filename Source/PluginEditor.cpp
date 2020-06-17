@@ -49,7 +49,7 @@ void NewProjectAudioProcessorEditor::resized()
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
     freqSlider.setBounds(100, getHeight() - (getHeight() - 20), 40, getHeight() - 60);
-    processor.lblConsole->setBounds(200, 50, 200, 100);
+    //processor.lblConsole->setBounds(200, 50, 200, 100);
 }
 
 void NewProjectAudioProcessorEditor::sliderValueChanged(Slider *slider)
