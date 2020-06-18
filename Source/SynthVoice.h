@@ -26,30 +26,30 @@ public:
     
     //=====================================================================
     
-    void getPeram(float* attack){
-        env1.setAttack(*attack);
+    void getAmpEnvelopeParams(float* attack, float* decay, float* sustain, float* release){
+        ampEnv.setAttack(*attack);
+        ampEnv.setDecay(*decay);
+        ampEnv.setSustain(*sustain);
+        ampEnv.setRelease(*release);
     };
     
+    //=====================================================================
     
     void startNote (int midiNoteNumber, float velocity, SynthesiserSound* sound, int currentPitchWheelPosition){
-
-        env1.trigger = 1;
+        ampEnv.trigger = 1;
         level = velocity;
         frequency = MidiMessage::getMidiNoteInHertz(midiNoteNumber);
-        //std::cout << "midiNoteNumber is: " << midiNoteNumber << std::endl;
-        
     }
     
     //=====================================================================
     
     void stopNote(float velocity, bool allowTailOff){
-        env1.trigger = 0;
+        ampEnv.trigger = 0;
         allowTailOff = true;
         
         if (velocity == 0){
             clearCurrentNote();
         }
-        
     }
     
     //=====================================================================
@@ -67,14 +67,10 @@ public:
     //=====================================================================
     
     virtual void renderNextBlock(AudioBuffer <float> &outputBuffer, int startSample, int numSamples){
-        //env1.setAttack(2000);
-        env1.setDecay(200);
-        env1.setSustain(0.5);
-        env1.setRelease(2000);
         
         for (int sample = 0; sample < numSamples ; sample++){
             double theWave = osc2.sineWave(frequency) * level;
-            double theSound = env1.adsr(theWave, env1.trigger) * level;
+            double theSound = ampEnv.adsr(theWave, ampEnv.trigger) * level;
             for (int channel = 0; channel < outputBuffer.getNumChannels() ; channel++) {
                 outputBuffer.addSample(channel, startSample, theSound);
             }
@@ -93,7 +89,7 @@ private:
         maxiOsc osc1;
         nickOsc osc2;
         
-        maxiEnv env1;
+        maxiEnv ampEnv;
     
     
 };

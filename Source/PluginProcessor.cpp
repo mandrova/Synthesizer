@@ -24,12 +24,23 @@ NewProjectAudioProcessor::NewProjectAudioProcessor()
                        .withOutput ("Output", AudioChannelSet::stereo(), true)
                      #endif
                        ),
-tree(*this, nullptr, "PARAMETER", { std::make_unique<AudioParameterFloat>("attack", "Attack", 1, 5000, 1)})
+tree(*this, nullptr, "PARAMETER", { std::make_unique<AudioParameterFloat>("ampEnvAtt", "Attack", 1, 5000, 1),
+                                    std::make_unique<AudioParameterFloat>("ampEnvDec", "Decay", 1, 2000, 1),
+                                    std::make_unique<AudioParameterFloat>("ampEnvSus", "Sustain", 0.001, 1.0, 0.001 ),
+                                    std::make_unique<AudioParameterFloat>("ampEnvRel", "Release", 1, 5000, 1),
+                                    
+                                    std::make_unique<AudioParameterFloat>("filEnvAtt", "Attack", 1, 5000, 1),
+                                    std::make_unique<AudioParameterFloat>("filEnvDec", "Decay", 1, 2000, 1),
+                                    std::make_unique<AudioParameterFloat>("filEnvSus", "Sustain", 0.001, 1.0, 0.001 ),
+                                    std::make_unique<AudioParameterFloat>("filEnvRel", "Release", 1, 5000, 1),
+                
+
+
+})
 
 #endif
 {
-    //NormalisableRange<float> attackParam (1, 5000);
-    //tree.createAndAddParameter("attack", "Attack", "Attack", attackParam, 1, nullptr, nullptr);
+    
     
     
     
@@ -157,51 +168,29 @@ bool NewProjectAudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
 void NewProjectAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
 {
     ScopedNoDenormals noDenormals;
-    auto totalNumInputChannels  = getTotalNumInputChannels();
-    auto totalNumOutputChannels = getTotalNumOutputChannels();
-
-    // In case we have more outputs than inputs, this code clears any output
-    // channels that didn't contain input data, (because these aren't
-    // guaranteed to be empty - they may contain garbage).
-    // This is here to avoid people getting screaming feedback
-    // when they first compile a plugin, but obviously you don't need to keep
-    // this code if your algorithm always overwrites all the output channels.
-    //for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
-        //buffer.clear (i, 0, buffer.getNumSamples());
-
-    // This is the place where you'd normally do the guts of your plugin's
-    // audio processing...
-    // Make sure to reset the state if your inner loop is processing
-    // the samples and the outer loop is handling the channels.
-    // Alternatively, you can process the samples with the channels
-    // interleaved by keeping the same state.
+    //auto totalNumInputChannels  = getTotalNumInputChannels();
+    //auto totalNumOutputChannels = getTotalNumOutputChannels();
     
     for (int i = 0; i < mySynth.getNumVoices(); i++){
         if ((myVoice = dynamic_cast<synthVoice*>(mySynth.getVoice(i)))){
-            float* newFloatPtr = (float*) tree.getRawParameterValue("attack");
-            myVoice->getPeram(newFloatPtr);
+            float* ampEnvAttack = (float*) tree.getRawParameterValue("ampEnvAtt");
+            float* ampEnvDecay = (float*) tree.getRawParameterValue("ampEnvDec");
+            float* ampEnvSustain = (float*) tree.getRawParameterValue("ampEnvSus");
+            float* ampEnvRelease = (float*) tree.getRawParameterValue("ampEnvRel");
+            
+            myVoice->getAmpEnvelopeParams(ampEnvAttack, ampEnvDecay, ampEnvSustain, ampEnvRelease);
+            
+            float* filEnvAttack = (float*) tree.getRawParameterValue("filEnvAtt");
+            float* filEnvDecay = (float*) tree.getRawParameterValue("filEnvDec");
+            float* filEnvSustain = (float*) tree.getRawParameterValue("filEnvSus");
+            float* filEnvRelease = (float*) tree.getRawParameterValue("filEnvRel");
+            
+            //myVoice->getFilEnvelopeParams(filEnvAttack, filEnvDecay, filEnvSustain, filEnvRelease);
         }
     }
     
     buffer.clear();
     mySynth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
-    
-    //for (int sample=0; sample < buffer.getNumSamples(); ++sample){
-    //    osc1->tick();
-    //    for (int channel = 0; channel < totalNumOutputChannels; ++channel)
-    //    {
-    //        auto* channelData = buffer.getWritePointer (channel);
-    
-            
-            
-    //        buffer.setSample(channel, sample, osc1->getSample());
-            //buffer.clear(channel, sample, buffer.getNumSamples());
-            //channelData[sample] = sine->getSample();
-            
-            //std::cout << "pulse sample is: " << sample << "With value: " << osc1->getSample() << std::endl;
-    //    }
-        
-    //}
 }
 
 //==============================================================================

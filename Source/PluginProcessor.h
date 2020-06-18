@@ -61,7 +61,10 @@ public:
     Oscillator *osc1;
     Label *lblConsole;
     
-    float attackTime;
+    float ampEnvAttackTime;
+    float ampEnvDecayTime;
+    float ampEnvSustainTime;    
+    float ampEnvReleaseTime;
     
     AudioProcessorValueTreeState tree;
     

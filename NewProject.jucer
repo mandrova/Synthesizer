@@ -5,31 +5,31 @@
               pluginFormats="buildAU,buildStandalone">
   <MAINGROUP id="ht4kKt" name="SynthVST">
     <GROUP id="{1584619A-E32D-DCDB-2518-F5BC09B9E75F}" name="Source">
-      <GROUP id="{61FEF09A-C00B-622E-25CA-3685D5B36B14}" name="src">
-        <GROUP id="{BEA2BF64-CC2A-2728-0E81-92991D4AD123}" name="libs">
-          <FILE id="x3ZAJD" name="fft.cpp" compile="1" resource="0" file="../Downloads/Maximilian-master/src/libs/fft.cpp"/>
-          <FILE id="ADSuHa" name="fft.h" compile="0" resource="0" file="../Downloads/Maximilian-master/src/libs/fft.h"/>
-          <FILE id="Ekz8KX" name="maxiAtoms.cpp" compile="1" resource="0" file="../Downloads/Maximilian-master/src/libs/maxiAtoms.cpp"/>
-          <FILE id="hWO67R" name="maxiAtoms.h" compile="0" resource="0" file="../Downloads/Maximilian-master/src/libs/maxiAtoms.h"/>
-          <FILE id="uFqetF" name="maxiBark.cpp" compile="1" resource="0" file="../Downloads/Maximilian-master/src/libs/maxiBark.cpp"/>
-          <FILE id="eXIYVb" name="maxiBark.h" compile="0" resource="0" file="../Downloads/Maximilian-master/src/libs/maxiBark.h"/>
-          <FILE id="tRnq5o" name="maxiFFT.cpp" compile="1" resource="0" file="../Downloads/Maximilian-master/src/libs/maxiFFT.cpp"/>
-          <FILE id="QAHIjS" name="maxiFFT.h" compile="0" resource="0" file="../Downloads/Maximilian-master/src/libs/maxiFFT.h"/>
-          <FILE id="DiPtkw" name="maxiGrains.cpp" compile="1" resource="0" file="../Downloads/Maximilian-master/src/libs/maxiGrains.cpp"/>
-          <FILE id="jabUWw" name="maxiGrains.h" compile="0" resource="0" file="../Downloads/Maximilian-master/src/libs/maxiGrains.h"/>
-          <FILE id="EToj9l" name="maxim.h" compile="0" resource="0" file="../Downloads/Maximilian-master/src/libs/maxim.h"/>
-          <FILE id="YEzr2e" name="maxiMFCC.cpp" compile="1" resource="0" file="../Downloads/Maximilian-master/src/libs/maxiMFCC.cpp"/>
-          <FILE id="D5bAgL" name="maxiMFCC.h" compile="0" resource="0" file="../Downloads/Maximilian-master/src/libs/maxiMFCC.h"/>
-          <FILE id="drkaI9" name="maxiReverb.cpp" compile="1" resource="0" file="../Downloads/Maximilian-master/src/libs/maxiReverb.cpp"/>
-          <FILE id="WodlbZ" name="maxiReverb.h" compile="0" resource="0" file="../Downloads/Maximilian-master/src/libs/maxiReverb.h"/>
-          <FILE id="XBNlog" name="maxiSynths.cpp" compile="1" resource="0" file="../Downloads/Maximilian-master/src/libs/maxiSynths.cpp"/>
-          <FILE id="njvE2I" name="maxiSynths.h" compile="0" resource="0" file="../Downloads/Maximilian-master/src/libs/maxiSynths.h"/>
-          <FILE id="k9m9oO" name="sineTable.h" compile="0" resource="0" file="../Downloads/Maximilian-master/src/libs/sineTable.h"/>
-          <FILE id="bh7QCY" name="stb_vorbis.c" compile="1" resource="0" file="../Downloads/Maximilian-master/src/libs/stb_vorbis.c"/>
-          <FILE id="d6DagV" name="stb_vorbis.h" compile="0" resource="0" file="../Downloads/Maximilian-master/src/libs/stb_vorbis.h"/>
+      <GROUP id="{21ED21AA-25B4-EFAD-B7A3-40A871316F37}" name="Maximilian">
+        <GROUP id="{70182397-A205-B07D-33C2-4CB98512DE14}" name="libs">
+          <FILE id="nj7Gkp" name="fft.cpp" compile="1" resource="0" file="Source/Maximilian/libs/fft.cpp"/>
+          <FILE id="sqzGMm" name="fft.h" compile="0" resource="0" file="Source/Maximilian/libs/fft.h"/>
+          <FILE id="CMCoww" name="maxiAtoms.cpp" compile="1" resource="0" file="Source/Maximilian/libs/maxiAtoms.cpp"/>
+          <FILE id="MVdsk0" name="maxiAtoms.h" compile="0" resource="0" file="Source/Maximilian/libs/maxiAtoms.h"/>
+          <FILE id="jppwhq" name="maxiBark.cpp" compile="1" resource="0" file="Source/Maximilian/libs/maxiBark.cpp"/>
+          <FILE id="laPaJd" name="maxiBark.h" compile="0" resource="0" file="Source/Maximilian/libs/maxiBark.h"/>
+          <FILE id="WGYB3j" name="maxiFFT.cpp" compile="1" resource="0" file="Source/Maximilian/libs/maxiFFT.cpp"/>
+          <FILE id="hdGUP0" name="maxiFFT.h" compile="0" resource="0" file="Source/Maximilian/libs/maxiFFT.h"/>
+          <FILE id="GDOBhw" name="maxiGrains.cpp" compile="1" resource="0" file="Source/Maximilian/libs/maxiGrains.cpp"/>
+          <FILE id="Ldt22H" name="maxiGrains.h" compile="0" resource="0" file="Source/Maximilian/libs/maxiGrains.h"/>
+          <FILE id="bAbaPj" name="maxim.h" compile="0" resource="0" file="Source/Maximilian/libs/maxim.h"/>
+          <FILE id="hPY4Gh" name="maxiMFCC.cpp" compile="1" resource="0" file="Source/Maximilian/libs/maxiMFCC.cpp"/>
+          <FILE id="JHmV8L" name="maxiMFCC.h" compile="0" resource="0" file="Source/Maximilian/libs/maxiMFCC.h"/>
+          <FILE id="ZES0PK" name="maxiReverb.cpp" compile="1" resource="0" file="Source/Maximilian/libs/maxiReverb.cpp"/>
+          <FILE id="uBM52C" name="maxiReverb.h" compile="0" resource="0" file="Source/Maximilian/libs/maxiReverb.h"/>
+          <FILE id="z7WMzy" name="maxiSynths.cpp" compile="1" resource="0" file="Source/Maximilian/libs/maxiSynths.cpp"/>
+          <FILE id="JyrHqx" name="maxiSynths.h" compile="0" resource="0" file="Source/Maximilian/libs/maxiSynths.h"/>
+          <FILE id="wt1wZx" name="sineTable.h" compile="0" resource="0" file="Source/Maximilian/libs/sineTable.h"/>
+          <FILE id="TQHHKw" name="stb_vorbis.c" compile="1" resource="0" file="Source/Maximilian/libs/stb_vorbis.c"/>
+          <FILE id="d7jNII" name="stb_vorbis.h" compile="0" resource="0" file="Source/Maximilian/libs/stb_vorbis.h"/>
         </GROUP>
-        <FILE id="Y28jNt" name="maximilian.cpp" compile="1" resource="0" file="../Downloads/Maximilian-master/src/maximilian.cpp"/>
-        <FILE id="yoryEX" name="maximilian.h" compile="0" resource="0" file="../Downloads/Maximilian-master/src/maximilian.h"/>
+        <FILE id="YqwuKV" name="maximilian.cpp" compile="1" resource="0" file="Source/Maximilian/maximilian.cpp"/>
+        <FILE id="eXcrBp" name="maximilian.h" compile="0" resource="0" file="Source/Maximilian/maximilian.h"/>
       </GROUP>
       <FILE id="FGAhVH" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
@@ -45,9 +45,7 @@
       <FILE id="mXRHiH" name="sine.cpp" compile="1" resource="0" file="Source/sine.cpp"/>
       <FILE id="LU9xoU" name="sine.h" compile="0" resource="0" file="Source/sine.h"/>
       <FILE id="wYE8DM" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
-      <FILE id="IVx65f" name="SynthSound.cpp" compile="1" resource="0" file="Source/SynthSound.cpp"/>
       <FILE id="GhVIcP" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
-      <FILE id="nTHbQH" name="SynthVoice.cpp" compile="1" resource="0" file="Source/SynthVoice.cpp"/>
       <FILE id="btWJOr" name="Waveform.cpp" compile="1" resource="0" file="Source/Waveform.cpp"/>
       <FILE id="kZBjU0" name="Waveform.h" compile="0" resource="0" file="Source/Waveform.h"/>
     </GROUP>
