@@ -113,6 +113,14 @@
 			isa = PBXBuildFile;
 			fileRef = 852BC1CA7C38D9D2B4BBAEE5;
 		};
+		5E8EA1EB396B06B13EE82968 = {
+			isa = PBXBuildFile;
+			fileRef = 9565D0B4E641161622F0F0D1;
+		};
+		978B6E0A2670921A7DD033AD = {
+			isa = PBXBuildFile;
+			fileRef = 300557D81707D2EA8938E094;
+		};
 		A2CBCECC8B9282630C675702 = {
 			isa = PBXBuildFile;
 			fileRef = 75120C0A9E9F52F553E3D036;
@@ -325,6 +333,13 @@
 			path = System/Library/Frameworks/AudioToolbox.framework;
 			sourceTree = SDKROOT;
 		};
+		300557D81707D2EA8938E094 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = Filter.cpp;
+			path = ../../Source/Filter.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		3059452A3E5CDC27C754B7B6 = {
 			isa = PBXFileReference;
 			explicitFileType = wrapper.cfbundle;
@@ -344,6 +359,13 @@
 			lastKnownFileType = sourcecode.c.c;
 			name = "stb_vorbis.c";
 			path = "../../Source/Maximilian/libs/stb_vorbis.c";
+			sourceTree = "SOURCE_ROOT";
+		};
+		3ADBC3BDEFE79FE9937CFE6B = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = Biquad.h;
+			path = ../../Source/Biquad.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		3BB7BA99E1168E6314362FFB = {
@@ -416,6 +438,13 @@
 			path = System/Library/Frameworks/CoreAudioKit.framework;
 			sourceTree = SDKROOT;
 		};
+		5C75A255B5AA404DB56074C1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = Filter.h;
+			path = ../../Source/Filter.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		5D452F1C902F342335A86C89 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
@@ -465,18 +494,18 @@
 			path = ../../Source/Maximilian/libs/maxiReverb.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
+		75120C0A9E9F52F553E3D036 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = PluginProcessor.cpp;
+			path = ../../Source/PluginProcessor.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		75E1246867E7A51AB52822CF = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
 			name = "juce_audio_devices";
 			path = "/Users/nickverbeek/Downloads/JUCE/modules/juce_audio_devices";
-			sourceTree = "<absolute>";
-		};
-		78F1E359DA1EAD4389C695AE = {
-			isa = PBXFileReference;
-			lastKnownFileType = file;
-			name = "juce_gui_extra";
-			path = "/Users/nickverbeek/Downloads/JUCE/modules/juce_gui_extra";
 			sourceTree = "<absolute>";
 		};
 		7DED07E3258365163097047E = {
@@ -485,13 +514,6 @@
 			name = Cocoa.framework;
 			path = System/Library/Frameworks/Cocoa.framework;
 			sourceTree = SDKROOT;
-		};
-		7E8A6B626C8C2C85B41C1F51 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			name = "include_juce_audio_plugin_client_Standalone.cpp";
-			path = "../../JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp";
-			sourceTree = "SOURCE_ROOT";
 		};
 		8347C33A87659E3CD903CF08 = {
 			isa = PBXFileReference;
@@ -507,11 +529,18 @@
 			path = libSynthVST.a;
 			sourceTree = "BUILT_PRODUCTS_DIR";
 		};
-		75120C0A9E9F52F553E3D036 = {
+		78F1E359DA1EAD4389C695AE = {
+			isa = PBXFileReference;
+			lastKnownFileType = file;
+			name = "juce_gui_extra";
+			path = "/Users/nickverbeek/Downloads/JUCE/modules/juce_gui_extra";
+			sourceTree = "<absolute>";
+		};
+		7E8A6B626C8C2C85B41C1F51 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = PluginProcessor.cpp;
-			path = ../../Source/PluginProcessor.cpp;
+			name = "include_juce_audio_plugin_client_Standalone.cpp";
+			path = "../../JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
 		8304DA35F101C30C5F6EA5AC = {
@@ -582,6 +611,13 @@
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = PluginEditor.cpp;
 			path = ../../Source/PluginEditor.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		9565D0B4E641161622F0F0D1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = Biquad.cpp;
+			path = ../../Source/Biquad.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		989EB1578EE8EEEAFF5DA42E = {
@@ -884,6 +920,10 @@
 			isa = PBXGroup;
 			children = (
 				938EC0E3B385D0CC97EB947C,
+				9565D0B4E641161622F0F0D1,
+				3ADBC3BDEFE79FE9937CFE6B,
+				300557D81707D2EA8938E094,
+				5C75A255B5AA404DB56074C1,
 				75120C0A9E9F52F553E3D036,
 				BBAF082BC9F1803130AA91BC,
 				934D8B1FCFA372BEC0216659,
@@ -1608,6 +1648,8 @@
 				06A7B95008F573548C17360F,
 				8793B06CAC6C8EA664A5241E,
 				DE209A7043A6DDE93FCA4E99,
+				5E8EA1EB396B06B13EE82968,
+				978B6E0A2670921A7DD033AD,
 				A2CBCECC8B9282630C675702,
 				BAC1271C33B853FC73DB2797,
 				A4E720C20C3361B3DE31CCF6,

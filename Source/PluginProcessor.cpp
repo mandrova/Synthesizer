@@ -33,6 +33,9 @@ tree(*this, nullptr, "PARAMETER", { std::make_unique<AudioParameterFloat>("ampEn
                                     std::make_unique<AudioParameterFloat>("filEnvDec", "Decay", 1, 2000, 1),
                                     std::make_unique<AudioParameterFloat>("filEnvSus", "Sustain", 0.001, 1.0, 0.001 ),
                                     std::make_unique<AudioParameterFloat>("filEnvRel", "Release", 1, 5000, 1),
+                                    std::make_unique<AudioParameterFloat>("filterFreq", "FilterFrequency", 10, 20000, 1),
+                                    std::make_unique<AudioParameterFloat>("filterHight", "FilterHight", 0.01, 1, 0.01),
+                                    
                 
 
 
@@ -185,7 +188,43 @@ void NewProjectAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuf
             float* filEnvSustain = (float*) tree.getRawParameterValue("filEnvSus");
             float* filEnvRelease = (float*) tree.getRawParameterValue("filEnvRel");
             
-            //myVoice->getFilEnvelopeParams(filEnvAttack, filEnvDecay, filEnvSustain, filEnvRelease);
+            myVoice->getFilEnvelopeParams(filEnvAttack, filEnvDecay, filEnvSustain, filEnvRelease);
+            
+            float* filterFreq = (float*) tree.getRawParameterValue("filterFreq");
+            myVoice->setFilterFrequency(filterFreq);
+            
+            float* filterHight = (float*) tree.getRawParameterValue("filterHight");
+            myVoice->setFilterHight(filterHight);
+            
+            
+            //changing the multiplier bassed on button input
+            //oscillator 1
+            if (boolOtave1BtnMin2 == true){
+                myVoice->setOctaveOne(0.25);
+            } else if (boolOtave1BtnMin1 == true){
+                myVoice->setOctaveOne(0.5);
+            } else if (boolOtave1BtnZero == true){
+                myVoice->setOctaveOne(1);
+            } else if (boolOtave1BtnPlus1 == true){
+                myVoice->setOctaveOne(2);
+            } else if (boolOtave1BtnPlus2 == true){
+                myVoice->setOctaveOne(4);
+            }
+            
+            //oscillator 2
+            if (boolOtave2BtnMin2 == true){
+                myVoice->setOctaveTwo(0.25);
+            } else if (boolOtave2BtnMin1 == true){
+                myVoice->setOctaveTwo(0.5);
+            } else if (boolOtave2BtnZero == true){
+                myVoice->setOctaveTwo(1);
+            } else if (boolOtave2BtnPlus1 == true){
+                myVoice->setOctaveTwo(2);
+            } else if (boolOtave2BtnPlus2 == true){
+                myVoice->setOctaveTwo(4);
+            }
+            
+            
         }
     }
     

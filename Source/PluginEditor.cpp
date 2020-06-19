@@ -146,7 +146,69 @@ NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor (NewProjectAudioP
     addAndMakeVisible(&filEnvRelSlider);
     
     filEnvReleaseSliderValue = std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(processor.tree, "filEnvRel", filEnvRelSlider);
+    
+    //================================================================================================================
+    
+    filterFreq.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    filterFreq.setTextBoxStyle(Slider::TextBoxBelow, true, 50, 50);
+    
+    Range<double> filterFreqRange;
+    filterFreqRange.setStart(20);
+    filterFreqRange.setEnd(20000);
+    
+    filterFreq.setRange(filterFreqRange, 1);
+    filterFreq.setValue(20000);
+    filterFreq.addListener(this);
+    addAndMakeVisible(&filterFreq);
+    
+    filterFreqSliderValue = std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(processor.tree, "filterFreq", filterFreq);
+    
+    btnOsc1Min2.setButtonText("-2");
+    btnOsc1Min2.addListener(this);
+    addAndMakeVisible(&btnOsc1Min2);
+    
+    btnOsc1Min1.setButtonText("-1");
+    btnOsc1Min1.addListener(this);
+    addAndMakeVisible(&btnOsc1Min1);
+    
+    btnOsc1Zero.setButtonText("<0>");
+    btnOsc1Zero.addListener(this);
+    addAndMakeVisible(&btnOsc1Zero);
+    
+    btnOsc1Plus1.setButtonText("+1");
+    btnOsc1Plus1.addListener(this);
+    addAndMakeVisible(&btnOsc1Plus1);
+    
+    btnOsc1Plus2.setButtonText("+2");
+    btnOsc1Plus2.addListener(this);
+    addAndMakeVisible(&btnOsc1Plus2);
+    
+    //================================================================================================================
+    
+    btnOsc2Min2.setButtonText("-2");
+    btnOsc2Min2.addListener(this);
+    addAndMakeVisible(&btnOsc2Min2);
+    
+    btnOsc2Min1.setButtonText("-1");
+    btnOsc2Min1.addListener(this);
+    addAndMakeVisible(&btnOsc2Min1);
+    
+    btnOsc2Zero.setButtonText("<0>");
+    btnOsc2Zero.addListener(this);
+    addAndMakeVisible(&btnOsc2Zero);
+    
+    btnOsc2Plus1.setButtonText("+1");
+    btnOsc2Plus1.addListener(this);
+    addAndMakeVisible(&btnOsc2Plus1);
+    
+    btnOsc2Plus2.setButtonText("+2");
+    btnOsc2Plus2.addListener(this);
+    addAndMakeVisible(&btnOsc2Plus2);
+    
+    //================================================================================================================
 }
+    
+    
 
 NewProjectAudioProcessorEditor::~NewProjectAudioProcessorEditor()
 {
@@ -160,8 +222,9 @@ void NewProjectAudioProcessorEditor::paint (Graphics& g)
 
     g.setColour (Colours::white);
     g.setFont (15.0f);
-    //g.drawFittedText ("midistuff", getLocalBounds(), Justification::centred, 1);
     
+    
+    //==============================================================================
     
     //draw text for amp envelope
     g.setFont(Font::plain);
@@ -172,10 +235,14 @@ void NewProjectAudioProcessorEditor::paint (Graphics& g)
     g.drawFittedText("Sustain", 130, 90, 50, 15, Justification::centred, 1);
     g.drawFittedText("Release", 190, 90, 50, 15, Justification::centred, 1);
     
+    //==============================================================================
+    
     //draw title for amp envelope block
     g.setFont(Font::bold);
     g.setFont(20.0f);
     g.drawFittedText("Amp Envelope", 10, 65, 250, 15, Justification::centred, 1);
+    
+    //==============================================================================
     
     //draw text for filter envelope
     g.setFont(Font::plain);
@@ -186,10 +253,14 @@ void NewProjectAudioProcessorEditor::paint (Graphics& g)
     g.drawFittedText("Sustain", 510, 90, 50, 15, Justification::centred, 1);
     g.drawFittedText("Release", 570, 90, 50, 15, Justification::centred, 1);
     
+    //==============================================================================
+    
     //draw title for amp envelope block
     g.setFont(Font::bold);
     g.setFont(20.0f);
     g.drawFittedText("Filter Envelope", 390, 65, 250, 15, Justification::centred, 1);
+    
+    //==============================================================================
     
     //setcolor for interface lines
     g.setColour(Colour::fromRGB(87, 91, 96));
@@ -225,22 +296,148 @@ void NewProjectAudioProcessorEditor::resized()
     x += spaceBetweenObjects;
     filEnvRelSlider.setBounds(x, envelopeY, 50, 150);
     
+    int btnY = 35;
+    int btnWidth = 30;
+    spaceBetweenObjects = 40;
+    x = 112;
+    
+    x -= spaceBetweenObjects * 2;
+    btnOsc1Min2.setBounds(x, btnY, btnWidth, 15);
+    x += spaceBetweenObjects;
+    btnOsc1Min1.setBounds(x, btnY, btnWidth, 15);
+    x += spaceBetweenObjects;
+    btnOsc1Zero.setBounds(x, btnY, btnWidth, 15);
+    x += spaceBetweenObjects;
+    btnOsc1Plus1.setBounds(x, btnY, btnWidth, 15);
+    x += spaceBetweenObjects;
+    btnOsc1Plus2.setBounds(x, btnY, btnWidth, 15);
+    
+    x += 200;
+    
+    btnOsc2Min2.setBounds(x, btnY, btnWidth, 15);
+    x += spaceBetweenObjects;
+    btnOsc2Min1.setBounds(x, btnY, btnWidth, 15);
+    x += spaceBetweenObjects;
+    btnOsc2Zero.setBounds(x, btnY, btnWidth, 15);
+    x += spaceBetweenObjects;
+    btnOsc2Plus1.setBounds(x, btnY, btnWidth, 15);
+    x += spaceBetweenObjects;
+    btnOsc2Plus2.setBounds(x, btnY, btnWidth, 15);
+    
+    filterFreq.setBounds(650, 300, 150,150);
+    filterHight.setBounds(850, 300, 150,150);
 }
 
 void NewProjectAudioProcessorEditor::sliderValueChanged(Slider *slider)
 {
-    if (slider == &ampEnvAttSlider){
-        processor.ampEnvAttackTime = ampEnvAttSlider.getValue();
-    } else if (slider == &ampEnvDecSlider){
-        processor.ampEnvDecayTime = ampEnvDecSlider.getValue();
-    } else if (slider == &ampEnvSusSlider){
-        processor.ampEnvSustainTime = ampEnvSusSlider.getValue();
-    } else if (slider == &ampEnvRelSlider){
-        processor.ampEnvReleaseTime = ampEnvRelSlider.getValue();
-    }
-    //std::cout << "Sine frequency is: " << processor.osc1->getFrequency() << std::endl;
+    
 }
 
-void NewProjectAudioProcessorEditor::drawEnvelopeBox(int x, int y, int width, int hight, Graphics& g){
-    
+
+
+void NewProjectAudioProcessorEditor::buttonClicked(Button* button){
+    if (button == &btnOsc1Min2){
+        //processor.myVoice->setOctave(0.25);
+        setStandardButtonText(1);
+        btnOsc1Min2.setButtonText("<-2>");
+        
+        setDefaultButtonStates(1);
+        processor.boolOtave1BtnMin2 = true;
+    } else if (button == &btnOsc1Min1){
+        //processor.myVoice->setOctave(0.5);
+        setStandardButtonText(1);
+        btnOsc1Min1.setButtonText("<-1>");
+        
+        setDefaultButtonStates(1);
+        processor.boolOtave1BtnMin1 = true;
+    } else if (button == &btnOsc1Zero){
+        //processor.myVoice->setOctave(1);
+        setStandardButtonText(1);
+        btnOsc1Zero.setButtonText("<0>");
+        
+        setDefaultButtonStates(1);
+        processor.boolOtave1BtnZero = true;
+    } else if (button == &btnOsc1Plus1){
+        //processor.myVoice->setOctave(2);
+        setStandardButtonText(1);
+        btnOsc1Plus1.setButtonText("<+1>");
+        
+        setDefaultButtonStates(1);
+        processor.boolOtave1BtnPlus1 = true;
+    } else if (button == &btnOsc1Plus2){
+        //processor.myVoice->setOctave(4);
+        setStandardButtonText(1);
+        btnOsc1Plus2.setButtonText("<+2>");
+        
+        setDefaultButtonStates(1);
+        processor.boolOtave1BtnPlus2 = true;
+    } else if (button == &btnOsc2Min2){
+        //processor.myVoice->setOctave(0.25);
+        setStandardButtonText(2);
+        btnOsc2Min2.setButtonText("<-2>");
+        
+        setDefaultButtonStates(2);
+        processor.boolOtave2BtnMin2 = true;
+    } else if (button == &btnOsc2Min1){
+        //processor.myVoice->setOctave(0.5);
+        setStandardButtonText(2);
+        btnOsc2Min1.setButtonText("<-1>");
+        
+        setDefaultButtonStates(2);
+        processor.boolOtave2BtnMin1 = true;
+    } else if (button == &btnOsc2Zero){
+        //processor.myVoice->setOctave(1);
+        setStandardButtonText(2);
+        btnOsc2Zero.setButtonText("<0>");
+        
+        setDefaultButtonStates(2);
+        processor.boolOtave2BtnZero = true;
+    } else if (button == &btnOsc2Plus1){
+        //processor.myVoice->setOctave(2);
+        setStandardButtonText(2);
+        btnOsc2Plus1.setButtonText("<+1>");
+        
+        setDefaultButtonStates(2);
+        processor.boolOtave2BtnPlus1 = true;
+    } else if (button == &btnOsc2Plus2){
+        //processor.myVoice->setOctave(4);
+        setStandardButtonText(2);
+        btnOsc2Plus2.setButtonText("<+2>");
+        
+        setDefaultButtonStates(2);;
+        processor.boolOtave2BtnPlus2 = true;
+    }
+}
+
+
+void NewProjectAudioProcessorEditor::setStandardButtonText(int oscillator){
+    if (oscillator == 1){
+        btnOsc1Min2.setButtonText("-2");
+        btnOsc1Min1.setButtonText("-1");
+        btnOsc1Zero.setButtonText("0");
+        btnOsc1Plus1.setButtonText("+1");
+        btnOsc1Plus2.setButtonText("+2");
+    } else{
+        btnOsc2Min2.setButtonText("-2");
+        btnOsc2Min1.setButtonText("-1");
+        btnOsc2Zero.setButtonText("0");
+        btnOsc2Plus1.setButtonText("+1");
+        btnOsc2Plus2.setButtonText("+2");
+    }
+}
+
+void NewProjectAudioProcessorEditor::setDefaultButtonStates(int oscillator){
+    if (oscillator == 1){
+        processor.boolOtave1BtnMin2 = false;
+        processor.boolOtave1BtnMin1 = false;
+        processor.boolOtave1BtnZero = false;
+        processor.boolOtave1BtnPlus1 = false;
+        processor.boolOtave1BtnPlus2 = false;
+    } else{
+        processor.boolOtave2BtnMin2 = false;
+        processor.boolOtave2BtnMin1 = false;
+        processor.boolOtave2BtnZero = false;
+        processor.boolOtave2BtnPlus1 = false;
+        processor.boolOtave2BtnPlus2 = false;
+    }
 }

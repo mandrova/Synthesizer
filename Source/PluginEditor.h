@@ -16,7 +16,7 @@
 //==============================================================================
 /**
 */
-class NewProjectAudioProcessorEditor  : public AudioProcessorEditor, public Slider::Listener
+class NewProjectAudioProcessorEditor  : public AudioProcessorEditor, public Slider::Listener, public Button::Listener
 
 {
 public:
@@ -28,10 +28,10 @@ public:
     void resized() override;
     
     void sliderValueChanged (Slider *slider) override;
+    void buttonClicked (Button *button) override;
     
-    void drawEnvelopeBox(int x, int y, int width, int hight, Graphics& g);
-    
-    
+    void setStandardButtonText(int oscillator);
+    void setDefaultButtonStates(int oscillator);
     
 private:
     // This reference is provided as a quick way for your editor to
@@ -49,7 +49,21 @@ private:
     Slider filEnvSusSlider;
     Slider filEnvRelSlider;
     
-    //declaration of labels
+    Slider filterFreq;
+    Slider filterHight;
+    
+    //declaration of buttons
+    TextButton btnOsc1Min2;
+    TextButton btnOsc1Min1;
+    TextButton btnOsc1Zero;
+    TextButton btnOsc1Plus1;
+    TextButton btnOsc1Plus2;
+    
+    TextButton btnOsc2Min2;
+    TextButton btnOsc2Min1;
+    TextButton btnOsc2Zero;
+    TextButton btnOsc2Plus1;
+    TextButton btnOsc2Plus2;
     
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (NewProjectAudioProcessorEditor)
@@ -63,4 +77,7 @@ public:
     std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> filEnvDecaySliderValue;
     std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> filEnvSustainSliderValue;
     std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> filEnvReleaseSliderValue;
+    
+    std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> filterFreqSliderValue;
+    std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> filterHightSliderValue;
 };

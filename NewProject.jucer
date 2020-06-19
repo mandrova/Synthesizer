@@ -31,6 +31,10 @@
         <FILE id="YqwuKV" name="maximilian.cpp" compile="1" resource="0" file="Source/Maximilian/maximilian.cpp"/>
         <FILE id="eXcrBp" name="maximilian.h" compile="0" resource="0" file="Source/Maximilian/maximilian.h"/>
       </GROUP>
+      <FILE id="kHP6YX" name="Biquad.cpp" compile="1" resource="0" file="Source/Biquad.cpp"/>
+      <FILE id="rBN1ud" name="Biquad.h" compile="0" resource="0" file="Source/Biquad.h"/>
+      <FILE id="w3iOrk" name="Filter.cpp" compile="1" resource="0" file="Source/Filter.cpp"/>
+      <FILE id="Oe1Cq8" name="Filter.h" compile="0" resource="0" file="Source/Filter.h"/>
       <FILE id="FGAhVH" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="ThGUEp" name="PluginProcessor.h" compile="0" resource="0"

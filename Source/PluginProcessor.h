@@ -61,18 +61,28 @@ public:
     Oscillator *osc1;
     Label *lblConsole;
     
-    float ampEnvAttackTime;
-    float ampEnvDecayTime;
-    float ampEnvSustainTime;    
-    float ampEnvReleaseTime;
+    //setting bools for button clicked
+    bool boolOtave1BtnMin2;
+    bool boolOtave1BtnMin1;
+    bool boolOtave1BtnZero;
+    bool boolOtave1BtnPlus1;
+    bool boolOtave1BtnPlus2;
+    
+    bool boolOtave2BtnMin2;
+    bool boolOtave2BtnMin1;
+    bool boolOtave2BtnZero;
+    bool boolOtave2BtnPlus1;
+    bool boolOtave2BtnPlus2;
     
     AudioProcessorValueTreeState tree;
+    
+    synthVoice* myVoice;
     
 private:
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (NewProjectAudioProcessor)
     Synthesiser mySynth;
-    synthVoice* myVoice;
+    
     
     double lastSampleRate;
     
