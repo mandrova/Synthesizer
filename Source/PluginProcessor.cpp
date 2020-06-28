@@ -7,7 +7,8 @@
 
   ==============================================================================
  
-    
+    This synth is using maximilian for a few options such as anvelopes. Also the
+    waveforms are bassed on the maximilian waveforms
  
   ==============================================================================
 */
