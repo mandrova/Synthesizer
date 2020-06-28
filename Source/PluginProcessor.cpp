@@ -6,6 +6,10 @@
     It contains the basic framework code for a JUCE plugin processor.
 
   ==============================================================================
+ 
+    
+ 
+  ==============================================================================
 */
 
 #include "PluginProcessor.h"
@@ -24,6 +28,7 @@ NewProjectAudioProcessor::NewProjectAudioProcessor()
                        .withOutput ("Output", AudioChannelSet::stereo(), true)
                      #endif
                        ),
+//below is the tree as its called. this stores the date of all sliders. These can be read in de processing block for further programming
 tree(*this, nullptr, "PARAMETER", { std::make_unique<AudioParameterFloat>("ampEnvAtt", "Attack", 1, 5000, 1),
                                     std::make_unique<AudioParameterFloat>("ampEnvDec", "Decay", 1, 2000, 1),
                                     std::make_unique<AudioParameterFloat>("ampEnvSus", "Sustain", 0.001, 1.0, 1.0f ),
@@ -46,11 +51,13 @@ tree(*this, nullptr, "PARAMETER", { std::make_unique<AudioParameterFloat>("ampEn
 
 #endif
 {
+    //creation of mySynth
     mySynth.clearVoices();
     for (int i=0; i<10; i++){
         mySynth.addVoice(new synthVoice());
     }
     
+    //clears mySynth and adds a new SynthSound as a voice
     mySynth.clearSounds();
     mySynth.addSound(new SynthSound);
     
@@ -125,12 +132,6 @@ void NewProjectAudioProcessor::changeProgramName (int index, const String& newNa
 //==============================================================================
 void NewProjectAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
-    osc1 = new Oscillator();
-    osc1->setup(sampleRate);
-    osc1->setWaveform(2);
-    
     ignoreUnused(samplesPerBlock);
     lastSampleRate = sampleRate;
     mySynth.setCurrentPlaybackSampleRate(lastSampleRate);
@@ -173,13 +174,16 @@ void NewProjectAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuf
     //auto totalNumInputChannels  = getTotalNumInputChannels();
     //auto totalNumOutputChannels = getTotalNumOutputChannels();
     
+    //get the voices that are used in mySynth
     for (int i = 0; i < mySynth.getNumVoices(); i++){
         if ((myVoice = dynamic_cast<synthVoice*>(mySynth.getVoice(i)))){
+            //get values out of the slider
             float* ampEnvAttack = (float*) tree.getRawParameterValue("ampEnvAtt");
             float* ampEnvDecay = (float*) tree.getRawParameterValue("ampEnvDec");
             float* ampEnvSustain = (float*) tree.getRawParameterValue("ampEnvSus");
             float* ampEnvRelease = (float*) tree.getRawParameterValue("ampEnvRel");
             
+            //send value to myvoice
             myVoice->getAmpEnvelopeParams(ampEnvAttack, ampEnvDecay, ampEnvSustain, ampEnvRelease);
             
             float* filEnvAttack = (float*) tree.getRawParameterValue("filEnvAtt");
@@ -225,6 +229,7 @@ void NewProjectAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuf
                 myVoice->setOctaveTwo(4);
             }
             
+            //selecting the waveform based on the osc states
             for (int i = 0; i < sizeof(osc1States); i++){
                 if (osc1States[i] == true){
                     myVoice->setWaveformOsc1(i+1);

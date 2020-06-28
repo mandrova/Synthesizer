@@ -32,6 +32,7 @@ void Triangle::tick(double sampleRate_, float frequency){
     }
 }
 
+//returning the last made sample
 float Triangle::getSample(){
     return sample;
 }

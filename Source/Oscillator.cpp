@@ -8,7 +8,6 @@
 #include <stdio.h>
 #include "Oscillator.h"
 #include "sine.h"
-#include "Waveform.h"
 
 double Oscillator::samplerate = 44100;
 
@@ -61,6 +60,9 @@ nickOsc::nickOsc(){
     
 }
 
+
+//above here are not being used.
+//everything below is used to create a sample
 double nickOsc::sineWave(double frequency_){
     double sRate = Oscillator::samplerate;
     output = sine.getSample();

@@ -39,6 +39,7 @@ void Sine::setFrequency(float frequency)
   this->frequency = frequency;
 }
 
+//returning the last made sample
 float Sine::getFrequency()
 {
   return frequency;

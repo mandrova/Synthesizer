@@ -38,10 +38,7 @@ double Filter::adsr(double input, int trigger) {
         releasephase=0;
         amplitude+=(1*attack);
         lastAmplitude = amplitude;
-        
-            output=input*amplitude;
-            //std::cout << "Attack Output: " << output << std::endl;
-        
+        output=input*amplitude;
         
         if (amplitude>=1) {
             amplitude=1;
@@ -50,10 +47,8 @@ double Filter::adsr(double input, int trigger) {
         }
     }
 
-
     if (decayphase==1) {
         output=input*(amplitude*=decay);
-        //std::cout << "Decay Output: " << output << std::endl;
         if (amplitude<=sustain) {
             decayphase=0;
             holdphase=1;
@@ -63,12 +58,10 @@ double Filter::adsr(double input, int trigger) {
     if (holdcount<holdtime && holdphase==1) {
         output=input*amplitude;
         holdcount++;
-        //std::cout << "Hold Count Output: " << output << std::endl;
     }
 
     if (holdcount>=holdtime && trigger==1) {
         output=input*amplitude;
-        //std::cout << "Hold Count 2 Output: " << output << std::endl;
     }
 
     if (holdcount>=holdtime && trigger!=1) {
@@ -80,11 +73,8 @@ double Filter::adsr(double input, int trigger) {
         
         
             
-            output=input*(amplitude*=release);
-            //std::cout << "Release Output: " << output << std::endl;
+        output=input*(amplitude*=release);
     }
-    
-    //std::cout << "Filter envelope Output: " << output << std::endl;
 
     return output;
 }
@@ -107,9 +97,9 @@ void Filter::setDecay(double decayMS) {
 }
 
 float Filter:: processAudio(float sample_, float filterCutoff, float filterResonance, float sampleRate_){
+    //proces audio in biquad. Check processing in biquad files
     biquad->setBiquad(0, filterCutoff / maxiSettings::sampleRate, 1, 0);
     output1 = biquad->process(sample_);
-    //output = biquad->process(sample_);
     
     return(output1);
 }

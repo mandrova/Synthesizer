@@ -8,10 +8,9 @@
 #ifndef Pulse_h
 #define Pulse_h
 
-#include "Waveform.h"
 #include "Maximilian/maximilian.h"
 
-class Pulse : public Waveform{
+class Pulse{
     
     
 public:

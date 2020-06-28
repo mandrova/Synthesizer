@@ -58,7 +58,7 @@ void Biquad::setPeakGain(double peakGainDB) {
 }
     
 void Biquad::setBiquad(int type, double Fc, double Q, double peakGainDB) {
-    
+    //calculate biquad
     this->type = type;
     this->Q = Q;
     this->Fc = Fc;

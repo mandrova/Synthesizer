@@ -19,20 +19,30 @@ NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor (NewProjectAudioP
     // editor's size to whatever you need it to be.
     setSize(680, 270);
     
+    //Do all the setting of components below
     //================================================================================================================
     
+    //set style of slider
     ampEnvAttSlider.setSliderStyle(Slider::SliderStyle::LinearVertical);
+    //set the textbox style being used
     ampEnvAttSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 50, 15);
     
+    //create a range
     Range<double> ampEnvAttackRange;
     ampEnvAttackRange.setStart(1);
     ampEnvAttackRange.setEnd(5000);
     
+    //set the range with usement of step increments
     ampEnvAttSlider.setRange(ampEnvAttackRange, 1);
+    
+    //set value: not being used enymore. Its now done by the tree object withing PluginProcessor.cpp
     ampEnvAttSlider.setValue(2000);
+    //add listener which is this
     ampEnvAttSlider.addListener(this);
+    //make the object visible
     addAndMakeVisible(&ampEnvAttSlider);
     
+    //setting a velue for the slider in the tree. The string value can be used to read the value.
     ampEnvAttackSliderValue = std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(processor.tree, "ampEnvAtt", ampEnvAttSlider);
     
     //================================================================================================================
@@ -316,8 +326,10 @@ void NewProjectAudioProcessorEditor::paint (Graphics& g)
     
     //==============================================================================
     
+    //draw filter text
     g.drawFittedText("Frequency", 315, 35, 50, 15, Justification::centred, 1);
     
+    //draw mixer text
     g.drawFittedText("Osc1 mix", 265, 170, 50, 15, Justification::centred, 1);
     g.drawFittedText("Osc2 mix", 365, 170, 50, 15, Justification::centred, 1);
     
@@ -328,6 +340,7 @@ void NewProjectAudioProcessorEditor::paint (Graphics& g)
     
     //==============================================================================
     
+    //draw title for filter
     g.drawFittedText("Filter", 250, 15, 180, 15, Justification::centred, 1);
     
     //setcolor for interface lines
@@ -341,16 +354,16 @@ void NewProjectAudioProcessorEditor::paint (Graphics& g)
     g.drawRect(5, 10, 240, 55);
     g.drawRect(435, 10, 240, 55);
     
-    
+    //draw rectangle filter field
     g.drawRect(250, 10, 180, 150);
     
+    //draw rectangle mix field
     g.drawRect(250, 165, 180, 100);
 }
 
 void NewProjectAudioProcessorEditor::resized()
 {
-    // This is generally where you'll want to lay out the positions of any
-    // subcomponents in your editor..
+    //setbounds for all object
     int x = 10;
     int spaceBetweenObjects = 60;
     int envelopeY = 110;
@@ -438,7 +451,7 @@ void NewProjectAudioProcessorEditor::resized()
 
 void NewProjectAudioProcessorEditor::sliderValueChanged(Slider *slider)
 {
-    
+    //not being used
 }
 
 
@@ -518,7 +531,7 @@ void NewProjectAudioProcessorEditor::buttonClicked(Button* button){
     }
     
     //set array for further selection of waveforms
-    
+    //oscStates can be found in pluginProcessor files
     if (button == & btnOsc1Sine){
         setDefaultOscStates(1);
         processor.osc1States[0] = true;
@@ -550,6 +563,7 @@ void NewProjectAudioProcessorEditor::buttonClicked(Button* button){
 
 
 void NewProjectAudioProcessorEditor::setStandardButtonText(int oscillator){
+    //setStandard text for the buttons.
     if (oscillator == 1){
         btnOsc1Min2.setButtonText("-2");
         btnOsc1Min1.setButtonText("-1");
@@ -566,6 +580,8 @@ void NewProjectAudioProcessorEditor::setStandardButtonText(int oscillator){
 }
 
 void NewProjectAudioProcessorEditor::setDefaultButtonStates(int oscillator){
+    //set button states for further changing the octaves
+    //these can be found in the pluginprocessor files
     if (oscillator == 1){
         processor.boolOtave1BtnMin2 = false;
         processor.boolOtave1BtnMin1 = false;
@@ -582,6 +598,8 @@ void NewProjectAudioProcessorEditor::setDefaultButtonStates(int oscillator){
 }
 
 void NewProjectAudioProcessorEditor::setDefaultOscStates(int oscNum){
+    //set states to false as default.
+    //further use of this can be found in pluginprocessor files
     if (oscNum == 1){
         for (int i = 0; i < 4; i++){
             processor.osc1States[i] = false;
