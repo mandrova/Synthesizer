@@ -137,9 +137,17 @@
 			isa = PBXBuildFile;
 			fileRef = B9846DEE7F330944A1FC2462;
 		};
+		8C446F85A563B80B64307415 = {
+			isa = PBXBuildFile;
+			fileRef = DC36BC0010E1922CDACB9E53;
+		};
 		C494BCD4381D7923D9DDBEC7 = {
 			isa = PBXBuildFile;
 			fileRef = FEF731CA8BFBE40BEB7FE628;
+		};
+		CFDE68254CA8F1FD0C248C63 = {
+			isa = PBXBuildFile;
+			fileRef = A3DB4388E1309CDF1708FB41;
 		};
 		7033538989C4AC920BA1E720 = {
 			isa = PBXBuildFile;
@@ -508,12 +516,26 @@
 			path = "/Users/nickverbeek/Downloads/JUCE/modules/juce_audio_devices";
 			sourceTree = "<absolute>";
 		};
+		78F1E359DA1EAD4389C695AE = {
+			isa = PBXFileReference;
+			lastKnownFileType = file;
+			name = "juce_gui_extra";
+			path = "/Users/nickverbeek/Downloads/JUCE/modules/juce_gui_extra";
+			sourceTree = "<absolute>";
+		};
 		7DED07E3258365163097047E = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
 			name = Cocoa.framework;
 			path = System/Library/Frameworks/Cocoa.framework;
 			sourceTree = SDKROOT;
+		};
+		7E8A6B626C8C2C85B41C1F51 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "include_juce_audio_plugin_client_Standalone.cpp";
+			path = "../../JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp";
+			sourceTree = "SOURCE_ROOT";
 		};
 		8347C33A87659E3CD903CF08 = {
 			isa = PBXFileReference;
@@ -528,20 +550,6 @@
 			includeInIndex = 0;
 			path = libSynthVST.a;
 			sourceTree = "BUILT_PRODUCTS_DIR";
-		};
-		78F1E359DA1EAD4389C695AE = {
-			isa = PBXFileReference;
-			lastKnownFileType = file;
-			name = "juce_gui_extra";
-			path = "/Users/nickverbeek/Downloads/JUCE/modules/juce_gui_extra";
-			sourceTree = "<absolute>";
-		};
-		7E8A6B626C8C2C85B41C1F51 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			name = "include_juce_audio_plugin_client_Standalone.cpp";
-			path = "../../JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp";
-			sourceTree = "SOURCE_ROOT";
 		};
 		8304DA35F101C30C5F6EA5AC = {
 			isa = PBXFileReference;
@@ -606,6 +614,13 @@
 			path = ../../Source/Oscillator.h;
 			sourceTree = "SOURCE_ROOT";
 		};
+		92A7E38342D9033CFAB21452 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = Triangle.h;
+			path = ../../Source/Triangle.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		934D8B1FCFA372BEC0216659 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -662,6 +677,13 @@
 			path = "../../JuceLibraryCode/include_juce_audio_devices.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
+		A3DB4388E1309CDF1708FB41 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = Triangle.cpp;
+			path = ../../Source/Triangle.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		A7A1D9A3E54DEF765E1020DB = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -675,6 +697,13 @@
 			name = "juce_cryptography";
 			path = "/Users/nickverbeek/Downloads/JUCE/modules/juce_cryptography";
 			sourceTree = "<absolute>";
+		};
+		B42A465E8C6498D223091B8F = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = Saw.h;
+			path = ../../Source/Saw.h;
+			sourceTree = "SOURCE_ROOT";
 		};
 		B7955AFB961AD19678E3EC53 = {
 			isa = PBXFileReference;
@@ -800,6 +829,13 @@
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_graphics.mm";
 			path = "../../JuceLibraryCode/include_juce_graphics.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
+		DC36BC0010E1922CDACB9E53 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = Saw.cpp;
+			path = ../../Source/Saw.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		E621E0A960B0C7CA2D077BC8 = {
@@ -932,10 +968,14 @@
 				9229F8CB00B37DE05029CB95,
 				B9846DEE7F330944A1FC2462,
 				F774E9AE3AB953165A6E7389,
+				DC36BC0010E1922CDACB9E53,
+				B42A465E8C6498D223091B8F,
 				FEF731CA8BFBE40BEB7FE628,
 				BFD36495C683D2222FE189F1,
 				21A63FA173199D09AAD9CA2A,
 				06F2CD6DC5121A4574E7D273,
+				A3DB4388E1309CDF1708FB41,
+				92A7E38342D9033CFAB21452,
 				F577837F7FAE122F24195B53,
 				5D452F1C902F342335A86C89,
 			);
@@ -1654,7 +1694,9 @@
 				BAC1271C33B853FC73DB2797,
 				A4E720C20C3361B3DE31CCF6,
 				E340C0E4925EF74E3059DF57,
+				8C446F85A563B80B64307415,
 				C494BCD4381D7923D9DDBEC7,
+				CFDE68254CA8F1FD0C248C63,
 				7033538989C4AC920BA1E720,
 				5DDCAC4143E4D1B2509AE1EE,
 				119EF375AD7C215FE5576EA1,

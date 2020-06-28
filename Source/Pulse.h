@@ -9,15 +9,16 @@
 #define Pulse_h
 
 #include "Waveform.h"
+#include "Maximilian/maximilian.h"
 
 class Pulse : public Waveform{
     
     
 public:
-    Pulse(float sampleRate, float phase);
+    Pulse();
     ~Pulse();
     
-    void tick(float);
+    void tick(double, float);
     float getSample();
     
     

@@ -9,6 +9,8 @@
 #define Oscillator_h
 #include "Pulse.h"
 #include "sine.h"
+#include "Saw.h"
+#include "Triangle.h"
 
 class Oscillator
 {
@@ -50,9 +52,15 @@ class nickOsc
 public:
     nickOsc();
     double sineWave(double);
+    double pulseWave(double);
+    double sawWave(double);
+    double triangleWave(double);
     
 private:
     Sine sine;
+    Pulse pulse;
+    Saw saw;
+    Triangle triangle;
 };
 
 #endif /* Oscillator_h */

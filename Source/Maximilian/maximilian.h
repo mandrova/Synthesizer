@@ -514,6 +514,7 @@ public:
 	double sustain;
 	double release;
 	double amplitude;
+    double lastAmplitude;
 
     void setAttack(double attackMS);
     void setRelease(double releaseMS);

@@ -46,10 +46,14 @@
       <FILE id="S0jkOL" name="Oscillator.h" compile="0" resource="0" file="Source/Oscillator.h"/>
       <FILE id="TZZItP" name="Pulse.cpp" compile="1" resource="0" file="Source/Pulse.cpp"/>
       <FILE id="KbJZo6" name="Pulse.h" compile="0" resource="0" file="Source/Pulse.h"/>
+      <FILE id="lDzqcb" name="Saw.cpp" compile="1" resource="0" file="Source/Saw.cpp"/>
+      <FILE id="plyRuY" name="Saw.h" compile="0" resource="0" file="Source/Saw.h"/>
       <FILE id="mXRHiH" name="sine.cpp" compile="1" resource="0" file="Source/sine.cpp"/>
       <FILE id="LU9xoU" name="sine.h" compile="0" resource="0" file="Source/sine.h"/>
       <FILE id="wYE8DM" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
       <FILE id="GhVIcP" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
+      <FILE id="hb5dUB" name="Triangle.cpp" compile="1" resource="0" file="Source/Triangle.cpp"/>
+      <FILE id="AeWAJm" name="Triangle.h" compile="0" resource="0" file="Source/Triangle.h"/>
       <FILE id="btWJOr" name="Waveform.cpp" compile="1" resource="0" file="Source/Waveform.cpp"/>
       <FILE id="kZBjU0" name="Waveform.h" compile="0" resource="0" file="Source/Waveform.h"/>
     </GROUP>

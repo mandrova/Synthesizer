@@ -33,6 +33,8 @@ public:
     void setStandardButtonText(int oscillator);
     void setDefaultButtonStates(int oscillator);
     
+    void setDefaultOscStates(int oscNum);
+    
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
@@ -50,7 +52,9 @@ private:
     Slider filEnvRelSlider;
     
     Slider filterFreq;
-    Slider filterHight;
+    
+    Slider osc1Volume;
+    Slider osc2Volume;
     
     //declaration of buttons
     TextButton btnOsc1Min2;
@@ -65,6 +69,15 @@ private:
     TextButton btnOsc2Plus1;
     TextButton btnOsc2Plus2;
     
+    TextButton btnOsc1Sine;
+    TextButton btnOsc1Pulse;
+    TextButton btnOsc1Saw;
+    TextButton btnOsc1Triangle;
+    
+    TextButton btnOsc2Sine;
+    TextButton btnOsc2Pulse;
+    TextButton btnOsc2Saw;
+    TextButton btnOsc2Triangle;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (NewProjectAudioProcessorEditor)
 public:
@@ -79,5 +92,7 @@ public:
     std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> filEnvReleaseSliderValue;
     
     std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> filterFreqSliderValue;
-    std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> filterHightSliderValue;
+    
+    std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> osc1VolumeSliderValue;
+    std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> osc2VolumeSliderValue;
 };

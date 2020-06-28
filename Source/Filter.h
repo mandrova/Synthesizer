@@ -21,6 +21,28 @@ public:
     //void setFrequency(double filterFrequency);
     //void setResonance(double filterResonance);
     
+    
+    
+    double adsr(double input,int trigger);
+    double input;
+    double output;
+    double attack;
+    double decay;
+    double sustain;
+    double release;
+    double amplitude;
+    double lastAmplitude;
+    bool trigger;
+
+    void setAttack(double attackMS);
+    void setRelease(double releaseMS);
+    void setDecay(double decayMS);
+    void setSustain(double sustainL);
+    
+    long holdtime=1;
+    long holdcount;
+    int attackphase,decayphase,sustainphase,holdphase,releasephase;
+    
     float processAudio(float sample_, float filterCutoff, float filterResonance, float sampleRate);
     
 private:
@@ -31,7 +53,7 @@ private:
     float y;//pos
     float z;//pole
     float c;//filter coefficient
-    float output;
+    float output1;
     
     Biquad *biquad;
 };

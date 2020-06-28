@@ -67,3 +67,24 @@ double nickOsc::sineWave(double frequency_){
     sine.tick(sRate, frequency_);
     return output;
 }
+
+double nickOsc::pulseWave(double frequency_){
+    double sRate = Oscillator::samplerate;
+    output = pulse.getSample();
+    pulse.tick(sRate, frequency_);
+    return output;
+}
+
+double nickOsc::sawWave(double frequency_){
+    double sRate = Oscillator::samplerate;
+    output = saw.getSample();
+    saw.tick(sRate, frequency_);
+    return output;
+}
+
+double nickOsc::triangleWave(double frequency_){
+    double sRate = Oscillator::samplerate;
+    output = triangle.getSample();
+    triangle.tick(sRate, frequency_);
+    return output;
+}

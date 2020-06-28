@@ -26,15 +26,18 @@ NewProjectAudioProcessor::NewProjectAudioProcessor()
                        ),
 tree(*this, nullptr, "PARAMETER", { std::make_unique<AudioParameterFloat>("ampEnvAtt", "Attack", 1, 5000, 1),
                                     std::make_unique<AudioParameterFloat>("ampEnvDec", "Decay", 1, 2000, 1),
-                                    std::make_unique<AudioParameterFloat>("ampEnvSus", "Sustain", 0.001, 1.0, 0.001 ),
+                                    std::make_unique<AudioParameterFloat>("ampEnvSus", "Sustain", 0.001, 1.0, 1.0f ),
                                     std::make_unique<AudioParameterFloat>("ampEnvRel", "Release", 1, 5000, 1),
                                     
                                     std::make_unique<AudioParameterFloat>("filEnvAtt", "Attack", 1, 5000, 1),
                                     std::make_unique<AudioParameterFloat>("filEnvDec", "Decay", 1, 2000, 1),
-                                    std::make_unique<AudioParameterFloat>("filEnvSus", "Sustain", 0.001, 1.0, 0.001 ),
-                                    std::make_unique<AudioParameterFloat>("filEnvRel", "Release", 1, 5000, 1),
-                                    std::make_unique<AudioParameterFloat>("filterFreq", "FilterFrequency", 10, 20000, 1),
-                                    std::make_unique<AudioParameterFloat>("filterHight", "FilterHight", 0.01, 1, 0.01),
+                                    std::make_unique<AudioParameterFloat>("filEnvSus", "Sustain", 0.001, 1.0f, 1.0f ),
+                                    std::make_unique<AudioParameterFloat>("filEnvRel", "Release", 1, 5000, 20),
+                                    std::make_unique<AudioParameterFloat>("filterFreq", "FilterFrequency", 10, 20000, 20000),
+    
+                                    std::make_unique<AudioParameterFloat>("osc1Volume", "osc1Volume", 0, 1, 1),
+                                    std::make_unique<AudioParameterFloat>("osc2Volume", "osc2Volume", 0, 1, 1),
+                                    
                                     
                 
 
@@ -43,12 +46,8 @@ tree(*this, nullptr, "PARAMETER", { std::make_unique<AudioParameterFloat>("ampEn
 
 #endif
 {
-    
-    
-    
-    
     mySynth.clearVoices();
-    for (int i=0; i<5; i++){
+    for (int i=0; i<10; i++){
         mySynth.addVoice(new synthVoice());
     }
     
@@ -190,12 +189,14 @@ void NewProjectAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuf
             
             myVoice->getFilEnvelopeParams(filEnvAttack, filEnvDecay, filEnvSustain, filEnvRelease);
             
+            //get Filter value from slider and set the desired filterfrequency
             float* filterFreq = (float*) tree.getRawParameterValue("filterFreq");
             myVoice->setFilterFrequency(filterFreq);
             
-            float* filterHight = (float*) tree.getRawParameterValue("filterHight");
-            myVoice->setFilterHight(filterHight);
-            
+            float* osc1Volume = (float*) tree.getRawParameterValue("osc1Volume");
+            float* osc2Volume = (float*) tree.getRawParameterValue("osc2Volume");
+            myVoice->setOsc1Volume(osc1Volume);
+            myVoice->setOsc2Volume(osc2Volume);
             
             //changing the multiplier bassed on button input
             //oscillator 1
@@ -222,6 +223,17 @@ void NewProjectAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuf
                 myVoice->setOctaveTwo(2);
             } else if (boolOtave2BtnPlus2 == true){
                 myVoice->setOctaveTwo(4);
+            }
+            
+            for (int i = 0; i < sizeof(osc1States); i++){
+                if (osc1States[i] == true){
+                    myVoice->setWaveformOsc1(i+1);
+                }
+            }
+            for (int i = 0; i < sizeof(osc2States); i++){
+                if (osc2States[i] == true){
+                    myVoice->setWaveformOsc2(i+1);
+                }
             }
             
             

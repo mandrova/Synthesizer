@@ -1,6 +1,7 @@
 #include "sine.h"
 #include "math.h"
 #include <iostream>
+#include "Maximilian/maximilian.h"
 
 Sine::Sine() {
   // initialize members
@@ -24,15 +25,10 @@ float Sine::getSample() {
 
 void Sine::tick(double sampleRate_, double frequency_) {
   // TODO - frequency / samplerate can be implemented in a more efficient way
-  phase += frequency_ / sampleRate_;
-  sample = sin(M_PI * 2 * phase);
-
-    //std::cout << "Sine - phase = \n" << phase;
-    if (phase >= 1){
-        phase -= 1;
-    }
+  sample=sin (phase*(M_PI * 2));
     
-    
+  if ( phase >= 1.0 ) phase -= 1.0;
+  phase += (1./(maxiSettings::sampleRate/(frequency_)));
     
 }
 

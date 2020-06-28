@@ -78,6 +78,9 @@ public:
     
     synthVoice* myVoice;
     
+    bool osc1States[4]{1,0,0,0};
+    bool osc2States[4]{1,0,0,0};
+    
 private:
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (NewProjectAudioProcessor)

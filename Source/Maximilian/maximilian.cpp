@@ -1301,7 +1301,7 @@ double maxiEnv::adsr(double input, double attack, double decay, double sustain, 
 }
 
 double maxiEnv::adsr(double input, int trigger) {
-
+    
 	if (trigger==1 && attackphase!=1 && holdphase!=1 && decayphase!=1){
 		holdcount=0;
 		decayphase=0;
@@ -1313,8 +1313,11 @@ double maxiEnv::adsr(double input, int trigger) {
 	if (attackphase==1) {
 		releasephase=0;
 		amplitude+=(1*attack);
-		output=input*amplitude;
-
+		
+            output=input*amplitude;
+            //std::cout << "Attack Output: " << output << std::endl;
+        
+        
 		if (amplitude>=1) {
 			amplitude=1;
 			attackphase=0;
@@ -1325,6 +1328,7 @@ double maxiEnv::adsr(double input, int trigger) {
 
 	if (decayphase==1) {
 		output=input*(amplitude*=decay);
+        //std::cout << "Decay Output: " << output << std::endl;
 		if (amplitude<=sustain) {
 			decayphase=0;
 			holdphase=1;
@@ -1334,10 +1338,12 @@ double maxiEnv::adsr(double input, int trigger) {
 	if (holdcount<holdtime && holdphase==1) {
 		output=input*amplitude;
 		holdcount++;
+        //std::cout << "Hold Count Output: " << output << std::endl;
 	}
 
 	if (holdcount>=holdtime && trigger==1) {
 		output=input*amplitude;
+        //std::cout << "Hold Count 2 Output: " << output << std::endl;
 	}
 
 	if (holdcount>=holdtime && trigger!=1) {
@@ -1346,9 +1352,14 @@ double maxiEnv::adsr(double input, int trigger) {
 	}
 
 	if (releasephase==1 && amplitude>0.) {
-		output=input*(amplitude*=release);
-
+		
+        
+            
+            output=input*(amplitude*=release);
+            //std::cout << "Release Output: " << output << std::endl;
 	}
+    
+    //std::cout << "Filter envelope Output: " << output << std::endl;
 
 	return output;
 }

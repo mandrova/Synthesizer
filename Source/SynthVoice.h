@@ -20,7 +20,10 @@
 class synthVoice :  public SynthesiserVoice
 {
 public:
-    
+    synthVoice(){
+        setOctaveOne(1);
+        setOctaveTwo(1);
+    }
     
     bool canPlaySound(SynthesiserSound *sound) override{
         return dynamic_cast<SynthSound*>(sound) != nullptr;
@@ -29,17 +32,24 @@ public:
     //=====================================================================
     
     void getAmpEnvelopeParams(float* attack, float* decay, float* sustain, float* release){
-        ampEnv.setAttack(*attack);
-        ampEnv.setDecay(*decay);
-        ampEnv.setSustain(*sustain);
-        ampEnv.setRelease(*release);
+        for (int i = 0; i<2 ; i++){
+            ampEnv[i].setAttack(*attack);
+            ampEnv[i].setDecay(*decay);
+            ampEnv[i].setSustain(*sustain);
+            ampEnv[i].setRelease(*release);
+        }
     };
     
     void getFilEnvelopeParams(float* attack, float* decay, float* sustain, float* release){
-        filterEnv.setAttack(*attack);
-        filterEnv.setDecay(*decay);
-        filterEnv.setSustain(*sustain);
-        filterEnv.setRelease(*release);
+        lowpassOsc1.setAttack(*attack);
+        lowpassOsc1.setDecay(*decay);
+        lowpassOsc1.setSustain(*sustain);
+        lowpassOsc1.setRelease(*release);
+        
+        lowpassOsc2.setAttack(*attack);
+        lowpassOsc2.setDecay(*decay);
+        lowpassOsc2.setSustain(*sustain);
+        lowpassOsc2.setRelease(*release);
     };
     
     
@@ -47,7 +57,10 @@ public:
     //=====================================================================
     
     void startNote (int midiNoteNumber, float velocity, SynthesiserSound* sound, int currentPitchWheelPosition) override{
-        ampEnv.trigger = 1;
+        ampEnv[0].trigger = 1;
+        ampEnv[1].trigger = 1;
+        lowpassOsc1.trigger = 1;
+        lowpassOsc2.trigger = 1;
         level = velocity;
         frequency = MidiMessage::getMidiNoteInHertz(midiNoteNumber);
         
@@ -55,8 +68,11 @@ public:
     
     //=====================================================================
     
-    void stopNote(float velocity, bool allowTailOff){
-        ampEnv.trigger = 0;
+    void stopNote(float velocity, bool allowTailOff) override{
+        ampEnv[0].trigger = 0;
+        ampEnv[1].trigger = 0;
+        lowpassOsc1.trigger = 0;
+        lowpassOsc2.trigger = 0;
         allowTailOff = true;
         
         if (velocity == 0){
@@ -66,41 +82,64 @@ public:
     
     //=====================================================================
     
-    void pitchWheelMoved(int newPitchWheelValue){
+    void pitchWheelMoved(int newPitchWheelValue) override{
         
     }
     
     //=====================================================================
     
-    void controllerMoved(int controllerNumber, int newControllerValue){
+    void controllerMoved(int controllerNumber, int newControllerValue) override{
         
     }
     
     //=====================================================================
     
-    virtual void renderNextBlock(AudioBuffer <float> &outputBuffer, int startSample, int numSamples){
-        
-        
-        
+    virtual void renderNextBlock(AudioBuffer <float> &outputBuffer, int startSample, int numSamples) override{
+    
         for (int sample = 0; sample < numSamples ; sample++){
-            double osc1Wave = osc1.sineWave(frequency*getOctaveOne()) * level;
-            double osc1Env = ampEnv.adsr(osc1Wave, ampEnv.trigger) * level;
-            double filterEnvFollower = filterEnv.adsr(osc1Env, ampEnv.trigger);
             
             
+            //std::cout << "OSC1: " << osc1Wave << std::endl;
             
-            //lowpass[0]->setBiquad(0, lowpassFreq / sampleRate, 1, 0);
+            //double osc1Wave = osc1.sineWave(frequency*getOctaveOne()) * level;
             
             
-            
-            float osc1Filt = lowpassOsc1.processAudio(filterEnvFollower, filterFreq, 1, maxiSettings::sampleRate);
-            
-            double osc2Wave = osc2.sineWave(frequency*getOctaveTwo()) * level;
-            double osc2Env = ampEnv.adsr(osc2Wave, ampEnv.trigger) * level;
-            double osc2Filt = lowpassOsc2.processAudio(osc2Env, 100, 1, maxiSettings::sampleRate);
             
             for (int channel = 0; channel < outputBuffer.getNumChannels() ; channel++) {
-                outputBuffer.addSample(channel, startSample, osc1Filt);
+                double osc1Wave;
+                double osc2Wave;
+                
+                if (waveformOsc1 == 1){
+                    osc1Wave = osc1.sineWave(frequency*getOctaveOne()) * level;
+                } else if (waveformOsc1 == 2){
+                    osc1Wave = osc1.pulseWave(frequency*getOctaveOne()) * level;
+                } else if (waveformOsc1 == 3){
+                    osc1Wave = osc1.sawWave(frequency*getOctaveOne()) * level;
+                } else if (waveformOsc1 == 4){
+                    osc1Wave = osc1.triangleWave(frequency*getOctaveOne()) * level;
+                }
+                
+                if (waveformOsc2 == 1){
+                    osc2Wave = osc2.sineWave(frequency*getOctaveTwo()) * level;
+                } else if (waveformOsc2 == 2){
+                    osc2Wave = osc2.pulseWave(frequency*getOctaveTwo()) * level;
+                } else if (waveformOsc2 == 3){
+                    osc2Wave = osc2.sawWave(frequency*getOctaveTwo()) * level;
+                } else if (waveformOsc2 == 4){
+                    osc2Wave = osc2.triangleWave(frequency*getOctaveTwo()) * level;
+                }
+                
+                double osc1Env = ampEnv[0].adsr(osc1Wave, ampEnv[0].trigger) * level;
+                double filterEnvFollower = lowpassOsc1.adsr(1, lowpassOsc1.trigger);
+                double osc1Filt = lowpassOsc1.processAudio(osc1Env, filterFreq * filterEnvFollower, 1, maxiSettings::sampleRate);
+                double osc1Output = osc1Filt * osc1Volume;
+                
+                double osc2Env = ampEnv[1].adsr(osc2Wave, ampEnv[1].trigger) * level;
+                double filterEnvFollower2 = lowpassOsc2.adsr(1, lowpassOsc1.trigger);
+                double osc2Filt = lowpassOsc2.processAudio(osc2Env, filterFreq * filterEnvFollower2, 1, maxiSettings::sampleRate);
+                double osc2Output = osc2Filt * osc2Volume;
+                
+                outputBuffer.addSample(channel, startSample, (osc1Output + osc2Output) * 0.8);
             }
             ++startSample;
             //std::cout << osc1Filt << std::endl;
@@ -142,8 +181,20 @@ public:
         
     }
     
-    void setFilterHight(float* filterHight_){
-        filterHight = *filterHight_;
+    void setOsc1Volume(float* volume_){
+        osc1Volume = *volume_;
+    }
+    
+    void setOsc2Volume(float* volume_){
+        osc2Volume = *volume_;
+    }
+    
+    void setWaveformOsc1(int waveform_){
+        waveformOsc1 = waveform_;
+    }
+    
+    void setWaveformOsc2(int waveform_){
+        waveformOsc2 = waveform_;
     }
     
     double octaveOscOne;
@@ -154,7 +205,9 @@ private:
     double level;
     
     double filterFreq;
-    double filterHight;
+    
+    float osc1Volume;
+    float osc2Volume;
         
     nickOsc osc1;
     nickOsc osc2;
@@ -162,8 +215,10 @@ private:
     Filter lowpassOsc1;
     Filter lowpassOsc2;
         
-    maxiEnv ampEnv;
-    maxiEnv filterEnv;
+    maxiEnv ampEnv[2];
     
+    
+    int waveformOsc1;
+    int waveformOsc2;
     
 };
