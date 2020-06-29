@@ -17,15 +17,10 @@ Pulse::~Pulse(){
     
 }
 
-void Pulse::tick(double sampleRate_, float frequency){
+void Pulse::tick(){
     //generating a square wave
     if (phase<0.5) sample=-1;
     if (phase>0.5) sample=1;
     if ( phase >= 1.0 ) phase -= 1.0;
-    phase += (1./(maxiSettings::sampleRate/(frequency)));
-}
-
-//returning the last made sample
-float Pulse::getSample(){
-    return sample;
+    phase += (1./(sampleRate/(frequency)));
 }

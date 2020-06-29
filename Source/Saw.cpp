@@ -20,13 +20,8 @@ Saw::~Saw(){
     
 }
 
-void Saw::tick(double sampleRate_, float frequency){
+void Saw::tick(){
     sample=phase;
     if ( phase >= 1.0 ) phase -= 2.0;
-    phase += (1./(maxiSettings::sampleRate/(frequency))) * 2.0;
-}
-
-//returning the last made sample
-float Saw::getSample(){
-    return sample;
+    phase += (1./(sampleRate/(frequency))) * 2.0;
 }

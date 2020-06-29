@@ -99,7 +99,7 @@ void Filter::setDecay(double decayMS) {
 float Filter:: processAudio(float sample_, float filterCutoff, float filterResonance, float sampleRate_){
     //proces audio in biquad. Check processing in biquad files
     biquad->setBiquad(0, filterCutoff / maxiSettings::sampleRate, 1, 0);
-    output1 = biquad->process(sample_);
+    output = biquad->process(sample_);
     
-    return(output1);
+    return(output);
 }

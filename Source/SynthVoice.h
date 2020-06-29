@@ -12,7 +12,7 @@
 
 #include <JuceHeader.h>
 #include "SynthSound.h"
-#include "Oscillator.h"
+#include "OscillatorProcessor.h"
 #include "Filter.h"
 #include "maximilian.h"
 #include "math.h"
@@ -224,8 +224,8 @@ private:
     float osc1Volume;
     float osc2Volume;
         
-    nickOsc osc1;
-    nickOsc osc2;
+    OscillatorProcessor osc1;
+    OscillatorProcessor osc2;
     
     Filter lowpassOsc1;
     Filter lowpassOsc2;

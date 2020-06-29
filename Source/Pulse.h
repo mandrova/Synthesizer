@@ -9,23 +9,19 @@
 #define Pulse_h
 
 #include "Maximilian/maximilian.h"
+#include "Oscillator.h"
 
-class Pulse{
+class Pulse : public Oscillator{
     
     
 public:
     Pulse();
     ~Pulse();
     
-    void tick(double, float);
-    float getSample();
-    
+    void tick();
     
 private:
-    float samplerate;
     float phase;
-    float sample;
-    float frequency;
 };
 
 #endif /* Pulse_h */

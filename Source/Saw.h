@@ -9,24 +9,19 @@
 */
 
 #pragma once
-#include "Maximilian/maximilian.h"
+#include "Oscillator.h"
 
-class Saw{
+class Saw : public Oscillator{
     
     
 public:
     Saw();
     ~Saw();
     
-    void tick(double, float);
-    float getSample();
-    
+    void tick();
     
 private:
-    float samplerate;
     float phase;
-    float sample;
-    float frequency;
 };
 
 

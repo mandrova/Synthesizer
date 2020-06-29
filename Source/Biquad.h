@@ -22,7 +22,7 @@
 class Biquad {
 public:
     Biquad();
-    Biquad(int type, double Fc, double Q, double peakGainDB);
+    //Biquad(int type, double Fc, double Q, double peakGainDB);
     ~Biquad();
     void setType(int type);
     void setQ(double Q);

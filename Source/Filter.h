@@ -47,13 +47,6 @@ public:
     
 private:
     float sample;
-    float cutoff;
-    float sampleRate;
-    float x;//speed
-    float y;//pos
-    float z;//pole
-    float c;//filter coefficient
-    float output1;
     
     Biquad *biquad;
 };

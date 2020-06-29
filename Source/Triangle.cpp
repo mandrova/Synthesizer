@@ -21,18 +21,13 @@ Triangle::~Triangle(){
     
 }
 
-void Triangle::tick(double sampleRate_, float frequency){
+void Triangle::tick(){
     //This is a triangle wave.
     if ( phase >= 1.0 ) phase -= 1.0;
-    phase += (1./(maxiSettings::sampleRate/(frequency)));
+    phase += (1./(sampleRate/(frequency)));
     if (phase <= 0.5 ) {
         sample =(phase - 0.25) * 4;
     } else {
         sample =((1.0-phase) - 0.25) * 4;
     }
-}
-
-//returning the last made sample
-float Triangle::getSample(){
-    return sample;
 }

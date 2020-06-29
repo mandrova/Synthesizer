@@ -9,20 +9,16 @@
 */
 
 #pragma once
-class Triangle{
+#include "Oscillator.h"
+class Triangle : public Oscillator{
     
     
 public:
     Triangle();
     ~Triangle();
     
-    void tick(double, float);
-    float getSample();
-    
+    void tick();
     
 private:
-    float samplerate;
     float phase;
-    float sample;
-    float frequency;
 };
