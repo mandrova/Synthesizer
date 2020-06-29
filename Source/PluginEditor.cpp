@@ -35,8 +35,6 @@ NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor (NewProjectAudioP
     //set the range with usement of step increments
     ampEnvAttSlider.setRange(ampEnvAttackRange, 1);
     
-    //set value: not being used enymore. Its now done by the tree object withing PluginProcessor.cpp
-    ampEnvAttSlider.setValue(2000);
     //add listener which is this
     ampEnvAttSlider.addListener(this);
     //make the object visible

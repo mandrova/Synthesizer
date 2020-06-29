@@ -29,10 +29,6 @@ Biquad::Biquad() {
     z1 = z2 = 0.0;
 }
 
-Biquad::Biquad(int type, double Fc, double Q, double peakGainDB) {
-    setBiquad(type, Fc, Q, peakGainDB);
-    z1 = z2 = 0.0;
-}
 
 Biquad::~Biquad() {
 }
